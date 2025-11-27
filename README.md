@@ -37,12 +37,12 @@
 <div class="section">
     <h2>Install</h2>
 
-    <h3>1. Clone the repo</h3>
+    1. Clone the repo
 <pre><code>git clone &lt;your-repo-url&gt;
 cd msu-uninotes
 </code></pre>
 
-    <h3>2. Install dependencies</h3>
+    2. Install dependencies
 <pre><code>npm install</code></pre>
 </div>
 
@@ -229,4 +229,5 @@ node server.js
 </div>
 </body>
 </html>
+
 
