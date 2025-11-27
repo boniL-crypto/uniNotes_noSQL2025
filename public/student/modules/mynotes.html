@@ -1,0 +1,264 @@
+<!-- public/student/modules/mynotes.html -->
+<section class="mynotes-section">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold">
+      <i class="bi bi-journal-text"></i> My Notes
+    </h4>
+    <button id="openUploadBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadNoteModal">
+      <i class="bi bi-cloud-upload"></i> Upload New Note
+    </button>
+  </div>  
+
+  <!-- Search & Filters -->
+  <div class="search-filter-bar d-flex flex-wrap gap-2 mb-4">
+    <div class="input-group" style="max-width: 260px;">
+      <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+      <input type="text" id="searchKeyword" class="form-control" placeholder="Search by title or keywords..." />
+    </div>
+
+    <!-- ✅ Updated Subject Filter (dynamic, unified width with visibility filter) -->
+    <div class="input-group" style="max-width: 160px;">
+      <span class="input-group-text bg-white"><i class="bi bi-book"></i></span>
+      <select id="filterSubject" class="form-select">
+        <option value="">All Subjects</option>
+      </select>
+    </div>
+
+    <div class="input-group" style="max-width: 160px;">
+      <span class="input-group-text bg-white"><i class="bi bi-eye"></i></span>
+      <select id="filterVisibility" class="form-select">
+        <option value="">All Visibility</option>
+        <option value="public">Public</option>
+        <option value="private">Private</option>
+      </select>
+    </div>
+
+    <div class="input-group" style="max-width: 180px;">
+      <span class="input-group-text bg-white"><i class="bi bi-tags"></i></span>
+      <input type="text" id="filterTags" class="form-control" placeholder="Tags" />
+    </div>
+
+    <div class="input-group" style="max-width: 180px;">
+      <span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+      <input type="month" id="filterDate" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary" id="searchBtn">
+      <i class="bi bi-search"></i> Search
+    </button>
+  </div>
+
+  <!-- Collections + Notes Grid -->
+  <div class="row g-3">
+    <!-- Collections column -->
+    <div id="collectionsCol" class="col-12 mb-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0">Collections</h5>
+        <div>
+          <!-- Button now relies on JS init; add explicit data attribute as fallback -->
+          <button id="openCreateCollectionBtn" class="btn btn-sm btn-outline-primary" data-collection-trigger="true">New Collection</button>
+        </div>
+      </div>
+
+      <div id="collectionsList" class="d-flex gap-2 flex-wrap">
+        <!-- collection cards injected by JS -->
+      </div>
+    </div>
+
+    <!-- Cards injected by JS -->
+    <div id="myNotesGrid" class="row g-3"></div>
+  </div>
+
+</section>
+
+  <!-- Create / Edit Collection Modal (lightweight custom modal, not Bootstrap) -->
+  <div id="collectionModal" class="custom-modal" aria-hidden="true" style="display:none;" data-collection-modal>
+    <div class="custom-modal-backdrop"></div>
+    <div class="custom-modal-dialog" role="dialog" aria-modal="true">
+      <div class="custom-modal-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Create Collection</h5>
+        <button id="collectionModalClose" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div class="custom-modal-body">
+        <div id="collectionForm">
+          <div class="mb-2">
+            <label class="form-label">Title *</label>
+            <input id="collectionTitle" name="title" class="form-control" />
+          </div>
+          <div>
+            <label class="form-label">Description</label>
+            <textarea id="collectionDescription" name="description" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="custom-modal-footer d-flex justify-content-end gap-2 mt-3">
+        <button id="collectionModalCancel" type="button" class="btn btn-secondary">Cancel</button>
+        <button id="saveCollectionBtn" type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+      <style>
+      /* minimal modal styles to avoid relying on Bootstrap JS */
+      /* Use high z-index so custom modal sits above any Bootstrap backdrops */
+      .custom-modal { position:fixed; inset:0; z-index:2050; }
+      .custom-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.4); z-index:2050; }
+      .custom-modal-dialog { position:relative; width:520px; max-width:90%; margin:6vh auto; background:#fff; border-radius:6px; padding:16px; box-shadow:0 6px 30px rgba(0,0,0,0.2); z-index:2060; pointer-events:auto; }
+      .custom-modal-header .btn-close { border:none; background:transparent; font-size:20px; }
+      .custom-modal-body { padding-top:8px; }
+      .custom-modal-footer { padding:8px 0 0 0; }
+      /* ensure inputs inside dialog accept pointer events */
+      .custom-modal-dialog * { pointer-events: auto; }
+    </style>
+  </div>
+
+<!-- ✅ Upload Note Modal (Searchable Subject Dropdown) -->
+<div class="modal fade" id="uploadNoteModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form id="uploadNoteForm" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title">Upload New Note</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Title *</label>
+            <input type="text" name="title" id="noteTitle" class="form-control" required />
+          </div>
+
+
+          <!-- ✅ Subject dropdown (Admin-parity: plain select, populated dynamically) -->
+          <div class="col-md-6">
+            <label class="form-label">Subject *</label>
+      <select name="subject" id="noteSubject"
+        class="form-select"
+        required>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Tags (comma separated)</label>
+            <input type="text" name="tags" id="noteTags" class="form-control" placeholder="Tags" />
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Description</label>
+            <textarea name="description" id="noteDescription" class="form-control" rows="4"></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Upload File</label>
+            <input type="file" name="file" id="noteFile" class="form-control"
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.webp,.txt,.csv,.zip" />
+            <small id="currentFileLabel" class="text-muted d-block mt-1"></small>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Visibility</label>
+            <select name="visibility" id="noteVisibility" class="form-select">
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div id="uploadAlert" class="alert d-none me-auto" role="alert"></div>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button id="uploadSubmitBtn" class="btn btn-primary" type="submit">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- View Note Modal -->
+<div class="modal fade" id="viewNoteModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewNoteTitle">Note Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="viewNoteBody"></div>
+        <hr />
+        <div id="notePreviewContainer"></div>
+      </div>
+
+
+      <div class="modal-footer d-flex justify-content-between">
+        <div>
+          <button id="reportBtn" class="btn btn-outline-danger" title="Report"><i class="bi bi-flag"></i></button>
+        </div>
+        <div class="d-flex gap-2">
+          <!-- Like icon button -->
+          <button id="likeNoteBtn" class="btn btn-outline-danger" title="Like">
+            <i id="likeIcon" class="bi bi-heart"></i>
+          </button>
+
+          <button id="editNoteBtn" class="btn btn-outline-secondary" title="Edit">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button id="deleteNoteBtn" class="btn btn-outline-danger" title="Delete">
+            <i class="bi bi-trash"></i>
+          </button>
+          <button id="downloadNoteBtn" class="btn btn-primary" title="Download">
+            <i class="bi bi-download"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Report Modal -->
+<div class="modal fade" id="reportNoteModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="reportNoteForm">
+        <div class="modal-header">
+          <h5 class="modal-title">Report Note</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <select id="reportReason" class="form-select" required>
+            <option value="">Select reason</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Spam">Spam</option>
+            <option value="Copyright violation">Copyright violation</option>
+            <option value="Other">Other</option>
+          </select>
+          <textarea id="reportDetails" name="description" class="form-control mt-2" placeholder="Add details (optional)"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Submit Report</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+  <div class="modal-body">Are you sure you want to delete <strong id="dynamicDeleteNoteTitle">this note</strong>?</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  

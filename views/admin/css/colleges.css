@@ -1,0 +1,85 @@
+/* ===============================
+   College View Modal styling
+   =============================== */
+#viewCoursesList li {
+  font-size: 0.95rem;
+}
+
+#viewCollegeModal .form-control-plaintext,
+#viewCollegeModal .form-control[readonly] {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: #333;
+}
+
+#viewCollegeModal .input-group .form-control[readonly] {
+  background-color: #f9f9f9;
+}
+
+#viewCoursesContainer .input-group {
+  gap: 5px;
+}
+
+#collegeObjectId[readonly],
+#viewObjectId[readonly] {
+  font-size: 0.9rem;
+  background-color: #f8f9fa;
+  color: #555;
+}
+
+/* ===============================
+   Delete Confirmation Modal
+   =============================== */
+#confirmDeleteModal .modal-content {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 1.05rem;
+}
+
+#confirmDeleteModal .modal-title {
+  font-size: 1.25rem; /* make title slightly larger */
+  font-weight: 100;
+}
+
+#confirmDeleteModal .modal-body p {
+  font-size: 1.05rem; /* increase text inside body */
+}
+
+/* Position and sizing */
+.modal.modal-top .modal-dialog {
+  margin-top: 100px;     /* position near top */
+  max-width: 500px;      /* wider modal */
+}
+
+/* Header styling */
+#confirmDeleteModal .modal-header {
+  background-color: #dc3545;
+  color: #fff;
+  padding-top: 1.2rem;     /* slightly taller red bar */
+  padding-bottom: 1.2rem;
+  border-bottom: none;
+}
+
+/* Body styling */
+#confirmDeleteModal .modal-body {
+  text-align: left;
+  font-size: 0.95rem;
+  color: #212529;
+  padding: 1rem 1.5rem;
+}
+
+/* Footer styling */
+#confirmDeleteModal .modal-footer {
+  border-top: none;
+  justify-content: flex-end;
+  padding: 0.75rem 1.5rem 1rem;
+}
+
+/* Buttons */
+#confirmDeleteModal .btn {
+  min-width: 90px;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.9rem;
+}

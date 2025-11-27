@@ -1,0 +1,124 @@
+c:\Users\silas\Documents\study_noteportal - google\google uni-notes
+├─ .env
+├─ api
+│  └─ notes.js
+├─ config
+│  └─ passport.js
+├─ directory.text
+├─ directory_tree.txt
+├─ middleware
+│  └─ auth.js
+├─ models
+│  ├─ College.js
+│  ├─ Notes.js
+│  ├─ Notification.js
+│  ├─ Report.js
+│  ├─ Subject.js
+│  └─ User.js
+├─ node_modules
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ forgot-password.html
+│  ├─ login.html
+│  ├─ register.html
+│  ├─ reset-password.html
+│  ├─ terms.html
+│  └─ student
+│     ├─ dashboard.html
+│     ├─ css
+│     │  ├─ dashboard-feed.css
+│     │  ├─ dashboard.css
+│     │  ├─ mynotes.css
+│     │  └─ profile.css
+│     ├─ js
+│     │  ├─ app.js
+│     │  ├─ dashboard-feed.js
+│     │  ├─ login.js
+│     │  ├─ mynotes.js
+│     │  ├─ notifications.js
+│     │  ├─ profile.js
+│     │  └─ register.js
+│     └─ modules
+│        ├─ dashboard-feed.html
+│        ├─ mynotes.html
+│        ├─ notifications.html
+│        └─ profile.html
+├─ routes
+│  ├─ admin
+│  │  ├─ colleges.js
+│  │  ├─ dashboard.js
+│  │  ├─ index.js
+│  │  ├─ notes.js
+│  │  ├─ notifications.js
+│  │  ├─ reports.js
+│  │  ├─ subjects.js
+│  │  └─ users.js
+│  ├─ auth.js
+│  ├─ colleges.js
+│  ├─ googleAuth.js
+│  ├─ notes.js
+│  ├─ notifications.js
+│  ├─ old admin.js
+│  ├─ old notes.js
+│  ├─ reports.js
+│  └─ subjects.js
+├─ seedAdmin.js
+├─ server.js
+├─ testEmail.js
+├─ uploads
+│  ├─ avatars
+│  │  ├─ 1757835708188-as.jpg
+│  │  ├─ 1757846926830-as.jpg
+│  │  ├─ 1757846957491-as.jpg
+│  │  ├─ 1759058297676-home-vector-icon (1).jpg
+│  │  ├─ 1759059914085-editdel.drawio.png
+│  │  ├─ 1759360328192-loc.png
+│  │  ├─ 1759360427898-iranun cloth.webp
+│  │  ├─ 1759370811348-AY.png
+│  │  ├─ 1759370821436-AY.png
+│  │  ├─ 1759524746566-iranun-products-08162023rn.jpg
+│  │  ├─ 1759528565563-user state.drawio.png
+│  │  ├─ 1760089347991-Untitled design.png
+│  │  ├─ 1760097090662-IMG_20250801_145413_837 (1).jpg
+│  │  ├─ 1760100132791-CamScanner 04-25-2025 15.06.jpg
+│  │  ├─ 1760258925741-Screenshot 2025-08-07 164305.png
+│  │  ├─ 1760336606739-Screenshot 2025-07-31 153438.png
+│  │  ├─ 1760336750305-Screenshot 2025-08-11 220122.png
+│  └─ notes
+├─ utils
+│  ├─ cleanPayload.js
+│  └─ sendEmail.js
+└─ views
+   └─ admin
+      ├─ dashboard.html
+      ├─ css
+      │  ├─ admin.css
+      │  ├─ cards.css
+      │  ├─ colleges.css
+      │  ├─ dashboard-feed.css
+      │  ├─ layout.css
+      │  ├─ notes.css
+      │  ├─ reports.css
+      │  ├─ sidebar.css
+      │  ├─ subjects.css
+      │  └─ users.css
+      ├─ js
+      │  ├─ colleges.js
+      │  ├─ dashboard-feed.js
+      │  ├─ dashboard.js
+      │  ├─ notes.js
+      │  ├─ notifications.js
+      │  ├─ old dashboard-feed.js
+      │  ├─ reports.js
+      │  ├─ subjects.js
+      │  └─ users.js
+      └─ modules
+         ├─ analytics.html
+         ├─ colleges.html
+         ├─ dashboard-feed.html
+         ├─ notes.html
+         ├─ notifications.html
+         ├─ reports.html
+         ├─ subjects.html
+         └─ users.html

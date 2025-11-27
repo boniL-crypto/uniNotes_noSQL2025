@@ -1,0 +1,48 @@
+/* views/admin/css/subjects.css */
+
+/* table / small tweaks */
+.module-manage-subjects .table td { vertical-align: middle; }
+.module-manage-subjects .form-label { font-weight: 600; }
+
+/* truncate description cell */
+.module-manage-subjects td[title] { max-width: 420px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Delete Confirmation Modal style */
+#confirmDeleteModal .modal-content { border-radius: 8px; transition: all 0.15s ease; }
+.modal.modal-top .modal-dialog { margin-top: 90px; max-width: 520px; }
+#confirmDeleteModal .modal-header { background-color: #dc3545; color: #fff; padding-top: 1.1rem; padding-bottom: 1.1rem; border-bottom: none; }
+#confirmDeleteModal .modal-body { font-size: 0.98rem; text-align: left; padding: 1rem 1.25rem; }
+#confirmDeleteModal .modal-footer { border-top: none; justify-content: flex-end; padding: 0.6rem 1.25rem; }
+#confirmDeleteModal .btn { min-width: 90px; }
+
+/* View modal readonly input look */
+#viewSubjectModal .form-control[readonly] { background-color: #f8f9fa; border: 1px solid #e6e6e6; }
+
+/* Toast container default ensures centered top */
+#toastContainerTop .toast { min-width: 260px; max-width: 720px; margin-bottom: 6px; }
+/* success/danger color variants use bootstrap .text-bg-... */
+
+/* Pagination area */
+#subjectsPagination {
+  margin-top: 0.5rem;
+}
+#subjectsPagination .page-link {
+  color: #007bff;
+  border: 1px solid #dee2e6;
+  font-size: 1rem; 
+}
+#subjectsPagination .page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+#subjectsPagination .page-link:hover {
+  background-color: #e9f2ff;
+}
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+th.sortable:hover {
+  background-color: #f1f4ff;
+}

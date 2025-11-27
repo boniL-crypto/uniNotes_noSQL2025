@@ -1,0 +1,33 @@
+//css/profile.css 
+//public/student/css/profile.css
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.profile-section {
+  padding: 1.5rem;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.avatar-lg {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 4px solid #e2e8f0;
+}
+
+button.btn-primary {
+  background: linear-gradient(90deg,#2563eb,#3b82f6);
+  border: none;
+  font-weight: 500;
+}
+button.btn-primary:hover { opacity: 0.9; }
+
+button.btn-warning {
+  font-weight: 500;
+}

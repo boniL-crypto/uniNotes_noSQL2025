@@ -1,0 +1,438 @@
+<!-- views/admin/modules/users.html -->
+<div class="module-manage-users page-container">
+  <style>
+    /* Pastel KPI card colors - subtle/light shades */
+    .kpi-card {padding:1rem;border-radius:0.5rem;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .kpi-card i{font-size:1.25rem;margin-bottom:0.25rem;opacity:0.95}
+    .kpi-card .kpi-label{font-size:0.85rem;color:#495057}
+    .kpi-card .kpi-value{font-weight:700;font-size:1.25rem}
+
+  /* slightly more vibrant but still soft */
+  .kpi-card.bg-sky{background:linear-gradient(180deg,#dff0ff,#eaf8ff);color:#1f6fe6}
+  .kpi-card.bg-green{background:linear-gradient(180deg,#e8fff0,#f1fff6);color:#19964a}
+  .kpi-card.bg-purple{background:linear-gradient(180deg,#efe8ff,#f7f1ff);color:#5f46c9}
+
+    /* subtle border to separate cards from page background */
+    .kpi-card.border{border:1px solid rgba(0,0,0,0.04)}
+  </style>
+  <!-- Header -->
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h4 class="mb-0"><i class="bi bi-people"></i> Manage Users</h4>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#roleSelectModal">
+      <i class="bi bi-person-plus"></i> Add User
+    </button>
+  </div>
+
+  <!-- KPI Row -->
+  <div class="row text-center justify-content-center kpi-section" id="usersKpiRow">
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+  <div class="kpi-card border bg-sky">
+        <i class="bi bi-people"></i>
+        <div class="kpi-label">Total Users</div>
+        <div class="kpi-value" id="kpi_total">0</div>
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+  <div class="kpi-card border bg-green">
+        <i class="bi bi-person"></i>
+        <div class="kpi-label">Students</div>
+        <div class="kpi-value" id="kpi_students">0</div>
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+  <div class="kpi-card border bg-purple">
+        <i class="bi bi-person-badge"></i>
+        <div class="kpi-label">Admins</div>
+        <div class="kpi-value" id="kpi_admins">0</div>
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+  <div class="kpi-card border bg-sky">
+        <i class="bi bi-shield-lock"></i>
+        <div class="kpi-label">Moderators</div>
+        <div class="kpi-value" id="kpi_moderators">0</div>
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+  <div class="kpi-card border bg-green">
+        <i class="bi bi-check-circle"></i>
+        <div class="kpi-label">Active Accounts</div>
+        <div class="kpi-value" id="kpi_active">0</div>
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+      <div class="kpi-card border bg-purple">
+        <i class="bi bi-x-circle"></i>
+        <div class="kpi-label">Inactive Accounts</div>
+        <div class="kpi-value" id="kpi_inactive">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="card card-ghost mb-3 p-3 filter-section">
+    <div class="row g-2 align-items-center">
+      <div class="col-md-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="text" id="searchInput" class="form-control" placeholder="Search by name, email, or student ID">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-building"></i></span>
+          <select id="collegeFilter" class="form-select">
+            <option value="">All Colleges</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+          <select id="roleFilter" class="form-select">
+            <option value="">All Roles</option>
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+            <option value="moderator">Moderator</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-toggle2-on"></i></span>
+          <select id="statusFilter" class="form-select">
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100" onclick="applyFilters()">
+          <i class="bi bi-search"></i> Search
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users Table -->
+  <div class="card card-ghost p-3">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>No.</th>
+            <th class="sortable" onclick="sortTable('id', this)">ObjectId <i class="bi bi-arrow-down-up"></i></th>
+            <th class="sortable" onclick="sortTable('studentId', this)">Student ID <i class="bi bi-arrow-down-up"></i></th>
+            <th class="sortable" onclick="sortTable('email', this)">Email <i class="bi bi-arrow-down-up"></i></th>
+            <th class="sortable" onclick="sortTable('name', this)">Name <i class="bi bi-arrow-down-up"></i></th>
+            <th class="sortable" onclick="sortTable('role', this)">Role <i class="bi bi-arrow-down-up"></i></th>
+            <th class="sortable" onclick="sortTable('isActive', this)">Status <i class="bi bi-arrow-down-up"></i></th>
+            <th class="col-actions">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody id="usersTableBody">
+          <tr><td colspan="8" class="text-center">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <nav><ul class="pagination mt-2" id="usersPagination"></ul></nav>
+  </div>
+</div>
+
+  <!-- Role Select Modal -->
+<div class="modal fade" id="roleSelectModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-plus-circle"></i> Add User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Select user type to create:</p>
+        <button class="btn btn-primary w-100 mb-2" onclick="openStudentModal()">Student</button>
+        <button class="btn btn-success w-100 mb-2" onclick="openAdminModal()">Admin</button>
+        <button class="btn btn-warning w-100" onclick="openModeratorModal()">Moderator</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Student Modal -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title"><i class="bi bi-person-plus"></i> Add Student</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addStudentForm" class="row g-3" novalidate>
+          <!-- Name -->
+          <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input 
+              type="text" 
+              name="name" 
+              class="form-control" 
+              required 
+              pattern="^[A-Za-z\s]+$" 
+              title="Name should contain only letters and spaces.">
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input 
+              type="email" 
+              name="email" 
+              class="form-control" 
+              required 
+              pattern="^[a-zA-Z0-9._%+-]+@msugensan\.edu\.ph$"
+              title="Email must end with @msugensan.edu.ph">
+          </div>
+
+          <!-- Password -->
+          <div class="col-md-6">
+            <label class="form-label">Password</label>
+            <input 
+              type="password" 
+              name="password" 
+              class="form-control" 
+              required 
+              minlength="6"
+              title="Password must be at least 6 characters long.">
+          </div>
+
+          <!-- Student ID -->
+          <div class="col-md-6">
+            <label class="form-label">Student ID</label>
+            <input 
+              type="text" 
+              name="studentId" 
+              class="form-control" 
+              required
+              pattern="^\d{4}-\d{4,}$"
+              title="Format: 0000-0000 (second part can be 4 or more digits)">
+          </div>
+
+          <!-- College -->
+          <div class="col-md-6">
+            <label class="form-label">College</label>
+            <select id="collegeSelect" name="college" class="form-select" required>
+              <option value="">Select College</option>
+            </select>
+          </div>
+
+          <!-- Course -->
+          <div class="col-md-6">
+            <label class="form-label">Course</label>
+            <select id="courseSelect" name="course" class="form-select" required>
+              <option value="">Select Course</option>
+            </select>
+          </div>
+
+          <!-- Year Level -->
+          <div class="col-md-6">
+            <label class="form-label">Year Level</label>
+            <select name="yearLevel" class="form-select" required>
+              <option value="">Select Year Level</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+              <option value="Graduate">Graduate</option>
+            </select>
+          </div>
+
+          <!-- Contact -->
+          <div class="col-md-6">
+            <label class="form-label">Contact</label>
+            <input 
+              type="text" 
+              name="contact" 
+              class="form-control" 
+             
+              pattern="^(\+639\d{9}|09\d{9})$" 
+              title="Use valid PH number format: +639XXXXXXXXX or 09XXXXXXXXX">
+          </div>
+
+          <!-- Bio -->
+          <div class="col-12">
+            <label class="form-label">Bio</label>
+            <textarea 
+              name="bio" 
+              class="form-control" 
+              maxlength="200" 
+              placeholder="Tell us something about yourself (max 200 chars)">
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" onclick="saveStudent()">Save Student</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Admin Modal -->
+<div class="modal fade" id="addAdminModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title"><i class="bi bi-person-badge"></i> Add Admin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addAdminForm" class="row g-3">
+          <div class="col-12"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
+          <div class="col-12"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
+          <div class="col-12"><label class="form-label">Password</label><input type="password" name="password" class="form-control" required></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-success" onclick="saveAdmin()">Save Admin</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Moderator Modal -->
+<div class="modal fade" id="addModeratorModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title"><i class="bi bi-shield-lock"></i> Add Moderator</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addModeratorForm" class="row g-3">
+          <div class="col-12"><label class="form-label">Name</label><input type="text" name="name" class="form-control" required></div>
+          <div class="col-12"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
+          <div class="col-12"><label class="form-label">Password</label><input type="password" name="password" class="form-control" required></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-warning" onclick="saveModerator()">Save Moderator</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- View User Modal (3-column layout, small fields) -->
+  <div class="modal fade" id="userViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-person-badge"></i> User Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3 align-items-stretch">
+            <div class="col-md-4"><label class="form-label">ID</label><input class="form-control" id="view_id" readonly></div>
+            <div class="col-md-4"><label class="form-label">Name</label><input class="form-control" id="view_name" readonly></div>
+            <div class="col-md-4"><label class="form-label">Email</label><input class="form-control" id="view_email" readonly></div>
+
+            <div class="col-md-4"><label class="form-label">Role</label><input class="form-control" id="view_role" readonly></div>
+            <div class="col-md-4 student-only"><label class="form-label">Student ID</label><input class="form-control" id="view_studentId" readonly></div>
+            <div class="col-md-4 student-only"><label class="form-label">College</label><input class="form-control" id="view_college" readonly></div>
+
+            <div class="col-md-4 student-only"><label class="form-label">Course</label><input class="form-control" id="view_course" readonly></div>
+            <div class="col-md-4 student-only"><label class="form-label">Year</label><input class="form-control" id="view_year" readonly></div>
+            <div class="col-md-4"><label class="form-label">Status</label><input class="form-control" id="view_status" readonly></div>
+            <div class="col-md-4"><label class="form-label">Email Verified</label><input class="form-control" id="view_emailVerified" readonly></div>
+
+            <div class="col-md-8">
+              <div class="row g-3 h-100">
+                <div class="col-md-6 student-only"><label class="form-label">Contact</label><input class="form-control" id="view_contact" readonly></div>
+                <div class="col-md-6"><label class="form-label">Created At</label><input class="form-control" id="view_createdAt" readonly></div>
+
+                <div class="col-12 student-only"><label class="form-label">Bio</label><textarea class="form-control" id="view_bio" rows="3" readonly></textarea></div>
+              </div>
+            </div>
+
+            <div class="col-md-4 d-flex align-items-stretch">
+              <div class="w-100 h-100 d-flex align-items-center justify-content-center" style="border:1px solid #e9ecef;border-radius:8px;overflow:hidden;background:#fff">
+                <img id="view_avatar" src="/uploads/avatars/default.png" alt="User avatar" class="img-fluid" style="max-height:100%;width:auto;object-fit:cover;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title"><i class="bi bi-trash"></i> Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete <strong id="deleteUserName">this user</strong>?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Modal (Activate / Deactivate) -->
+  <div class="modal fade" id="statusModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title" id="statusModalTitle"><i class="bi bi-person-x"></i> Change Status</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p id="statusModalBody">Are you sure?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-warning" id="confirmStatusBtn">Proceed</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  // toggle student fields
+  document.addEventListener("DOMContentLoaded", () => {
+    const roleSelect = document.getElementById("roleSelect");
+    const studentFields = document.getElementById("studentFields");
+
+    roleSelect.addEventListener("change", () => {
+      if (roleSelect.value === "student") {
+        studentFields.style.display = "block";
+      } else {
+        studentFields.style.display = "none";
+      }
+    });
+  });
+</script>

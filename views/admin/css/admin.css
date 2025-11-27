@@ -1,0 +1,35 @@
+/* ===== Admin Main Stylesheet ===== */
+/* views/admin/css/admin.css */
+
+/* Core layout */
+@import url('sidebar.css');
+@import url('layout.css');
+@import url('cards.css');
+@import url('dashboard-feed.css');
+@import url('notes.css');
+@import url('users.css');
+
+/* Global settings */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+  margin: 0;
+}
+
+
+
+  .sortable {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .sortable i {
+    font-size: 0.8rem;
+    margin-left: 4px;
+    color: #6c757d;
+  }
+  .sortable.active i {
+    color: #0d6efd;
+  }
+

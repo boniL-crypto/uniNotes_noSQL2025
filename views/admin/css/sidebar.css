@@ -1,0 +1,103 @@
+/* ===== Sidebar Styles ===== */
+/* views/admin/css/sidebar.css */
+
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  width: 240px;
+  background: linear-gradient(180deg, #4e73df, #1cc88a);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  transition: width 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar .brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.sidebar .logo {
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg,#60a5fa,#3b82f6);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 18px rgba(59,130,246,0.25);
+}
+
+.sidebar .brand-text {
+  margin-left: .6rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+.sidebar .brand-text small {
+  font-weight: 400;
+  font-size: 0.8rem;
+  display: block;
+  opacity: 0.9;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0; margin: 0;
+  flex: 1;
+}
+
+.sidebar ul li a {
+  display: flex; align-items: center;
+  gap: .8rem;
+  color: white;
+  padding: .65rem 1rem;
+  border-radius: 10px;
+  transition: background .2s, transform .2s;
+  text-decoration: none !important;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(3px);
+  font-weight: 600;
+}
+
+.sidebar.collapsed {
+  width: 90px;
+}
+.sidebar.collapsed .brand-text,
+.sidebar.collapsed ul li a span,
+.sidebar.collapsed .logout-btn span {
+  display: none;
+}
+
+.sidebar .toggle-btn {
+  margin-left: auto;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* Prevent wrapping in sidebar text */
+.sidebar ul li a span,
+.sidebar .brand-text,
+.logout-btn span {
+  white-space: nowrap;
+}
+
+.logout-btn {
+  margin-top: auto;
+  padding: .65rem 1rem;
+  border-radius: 10px;
+  display: flex; align-items: center; gap: .8rem;
+  cursor: pointer;
+  color: white;
+}
+.logout-btn:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff !important;
+}

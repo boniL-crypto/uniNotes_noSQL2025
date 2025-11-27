@@ -1,0 +1,204 @@
+.badge-role-superadmin {
+  background: #6f42c1;
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.badge-role-moderator {
+  background: #ffc107;
+  color: #212529;
+  padding: 0.25em 0.7em;
+  border-radius: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.badge-role-admin {
+  background: #198754;
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.badge-role-student {
+  background: #0d6efd;
+  color: #fff;
+  padding: 0.25em 0.7em;
+  border-radius: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+/* =======================================
+   Manage Users Module CSS
+   File: views/admin/css/users.css
+   ======================================= */
+
+/* --- Manage Users KPI Cards (Compact & Aligned) --- */
+#usersKpiRow {
+  justify-content: center;
+  gap: 0; 
+  margin-bottom: 1rem;/* 🔧 reduced spacing before filters */
+  --bs-gutter-x: 1rem;
+}
+
+.kpi-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 0.9rem 0.5rem;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.kpi-card i {
+  font-size: 1.6rem;
+  color: #6c757d;
+  margin-bottom: 0.2rem;
+  display: block;
+}
+
+.kpi-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+
+.kpi-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+/* Make 5 cards stretch evenly across container */
+#usersKpiRow > div {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 0 !important; /* ✅ force remove Bootstrap .mb-3 gap */
+}
+
+.kpi-section {
+  margin-bottom: 0.25rem; /* ✅ minimal gap below KPI section */
+}
+
+/* Filters and spacing fix */
+.filter-section {
+  margin-top: 0 !important; /* ✅ eliminates gap above filters */
+}
+
+/* Slightly increase left-right padding for layout balance */
+.page-container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* =======================================
+   Table and Filters Styling
+   ======================================= */
+#usersTableBody td,
+#usersTableBody th {
+  vertical-align: middle;
+}
+
+th:first-child,
+td:first-child {
+  width: 40px;
+  text-align: center;
+}
+
+/* Reduce horizontal scroll */
+.col-objectid {
+  min-width: 180px;
+  word-break: break-all;
+}
+
+.col-email {
+  min-width: 180px;
+  word-break: break-all;
+}
+
+/* Even smaller for long text columns */
+td.col-objectid,
+td.col-email {
+  font-size: 0.7rem;  
+  word-break: break-all;
+  max-width: 150px;
+}
+
+/* Even smaller for long text columns */
+td.col-studentId {
+  font-size: 0.8rem;
+}
+.col-actions {
+  width: 110px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.users-action-btn {
+  padding: 0.3rem 0.4rem;
+  min-width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3px;
+}
+
+@media (max-width: 1200px) {
+  .col-objectid {
+    min-width: 150px;
+  }
+  .col-email {
+    min-width: 150px;
+  }
+}
+
+/* --- Role Badges --- */
+.badge-role-student {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.badge-role-admin {
+  background: #198754;
+  color: #fff;
+}
+
+
+
+.table {
+  font-size: 0.9rem; /* reduce all table text */
+}
+
+.table th, 
+.table td {
+  padding: 0.4rem 0.5rem; /* tighten horizontal spacing */
+}
+
+/* Center align status icons */
+td:nth-child(10) { /* assuming Status is the 10th column */
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Optional: make the circle icons slightly smaller and vertically centered */
+td:nth-child(10) i.bi-circle-fill {
+  font-size: 0.9rem;
+  vertical-align: middle;
+}

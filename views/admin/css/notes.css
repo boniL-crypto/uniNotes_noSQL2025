@@ -1,0 +1,150 @@
+//views/admin/css/notes.css
+
+.module-manage-notes {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* --- KPI Cards --- */
+.kpi-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  transition: 0.2s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+.kpi-card i {
+  font-size: 1.5rem;
+  color: var(--bs-gray-600);
+}
+.kpi-label {
+  font-size: 0.9rem;
+  color: var(--bs-gray-700);
+}
+.kpi-value {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--bs-dark);
+}
+
+/* --- Action Buttons --- */
+.table td .btn {
+  padding: 6px 10px; /* same padding as Manage Users */
+  border-radius: 3px;
+}
+
+/* --- Tooltip (arrow rectangle style) --- */
+.tooltip.custom-tooltip .tooltip-inner {
+  background-color: #333;
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+.tooltip.custom-tooltip .tooltip-arrow::before {
+  border-top-color: #333 !important;
+}
+
+/* --- View/Edit Modal Grid Layout --- */
+.note-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.note-detail-grid .item strong {
+  display: block;
+  color: #555;
+}
+
+/* --- Full width preview in modal --- */
+#adminPreview {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Force preview (image/pdf) to occupy full modal width */
+.note-detail-grid + #adminPreview {
+  grid-column: 1 / -1 !important;
+  width: 100%;
+}
+
+#adminPreview iframe,
+#adminPreview img {
+  width: 100% !important;
+  height: 500px;
+  border-radius: 6px;
+  object-fit: contain;
+  display: block;
+}
+
+/* --- File input section (for consistency) --- */
+#noteDetailBody .form-control,
+#noteDetailBody .form-select {
+  border-radius: 6px;
+}
+
+/* Make Replace File and Description fields full width */
+#noteDetailBody .form-label {
+  font-weight: 500;
+  color: #444;
+}
+#noteDetailBody .input-group,
+#noteDetailBody textarea {
+  width: 100%;
+}
+
+
+/* ===============================
+   Delete Confirmation Modal (Notes)
+   =============================== */
+#confirmDeleteModal .modal-content {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 1.05rem; /* slightly larger font for readability */
+}
+
+#confirmDeleteModal .modal-title {
+  font-size: 1.25rem; /* make title slightly larger */
+  font-weight: 100;
+}
+
+/* Position and sizing */
+.modal.modal-top .modal-dialog {
+  margin-top: 100px; /* position near top */
+  max-width: 500px;  /* moderate width */
+}
+
+/* Red header styling */
+#confirmDeleteModal .modal-header {
+  background-color: #dc3545;
+  color: #fff;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: none;
+}
+
+/* Body styling */
+#confirmDeleteModal .modal-body {
+  text-align: left;
+  color: #212529;
+  font-size: 1rem;
+  padding: 1rem 1.5rem;
+}
+
+/* Footer styling */
+#confirmDeleteModal .modal-footer {
+  border-top: none;
+  justify-content: flex-end;
+  padding: 0.75rem 1.5rem 1rem;
+}
+
+/* Buttons */
+#confirmDeleteModal .btn {
+  min-width: 90px;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.9rem;
+}

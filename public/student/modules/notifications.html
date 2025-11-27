@@ -1,0 +1,27 @@
+<!---public/student/modules/notifications.html-->
+
+<section class="notifications-section">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold">
+      <i class="bi bi-bell-fill"></i> Notifications
+    </h4>
+    <button id="markAllReadBtn" class="btn btn-outline-primary btn-sm">
+      <i class="bi bi-check2-all"></i> Mark all as read
+    </button>
+  </div>
+
+  <div class="d-flex align-items-center gap-2 mb-2">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="selectAllNotifs">
+      <label class="form-check-label small" for="selectAllNotifs">Select All</label>
+    </div>
+    <button id="bulkHideBtn" class="btn btn-outline-danger btn-sm" disabled>
+      <i class="bi bi-trash"></i> Remove Selected
+    </button>
+  </div>
+
+  <!-- Notifications List -->
+  <ul id="notificationsList" class="list-group">
+    <!-- Injected by JS -->
+  </ul>
+</section>

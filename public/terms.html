@@ -1,0 +1,139 @@
+<!-- public/terms.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms of Use — UniNotes</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+      :root{
+        --bg:#f7f9fb;
+        --card:#ffffff;
+        --muted:#6c757d;
+      }
+      html,body{height:100%;}
+      body{
+        background:var(--bg);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        color:#212529;
+        -webkit-font-smoothing:antialiased;
+      }
+      .hero{
+        padding:2.5rem 1rem;
+        margin-top:1.5rem;
+      }
+      .terms-card{border:0;border-radius:0.5rem;box-shadow:0 6px 18px rgba(23,31,38,0.08);}
+      .section-title{font-size:1.05rem;font-weight:600}
+      .muted{color:var(--muted)}
+      footer{padding:1.5rem 0;color:var(--muted);font-size:0.9rem}
+      @media (min-width:992px){
+        .hero{padding:3rem}
+      }
+    </style>
+  </head>
+  <body>
+    <header class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-3">
+        <div class="container-fluid px-0">
+          <a class="navbar-brand fw-bold d-flex align-items-center" href="/">
+            <span class="me-2 d-inline-flex align-items-center justify-content-center" style="width:38px;height:38px;border-radius:8px;background:linear-gradient(135deg,#4f8ef7,#2a6ef2);color:#fff;font-weight:700;font-family:monospace">UN</span>
+            <span>UniNotes</span>
+          </a>
+          <div>
+            <a class="btn btn-outline-secondary btn-sm me-2" href="login.html">Sign in</a>
+            <a class="btn btn-primary btn-sm" href="register.html">Register</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container hero" role="main">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-9">
+          <article class="card terms-card p-4 p-md-5 bg-white">
+            <header class="mb-3">
+              <h1 class="mb-0">Terms of Use</h1>
+              <p class="text-muted small mb-0">UniNotes — for sharing academic notes and resources</p>
+            </header>
+
+            <section class="mt-4">
+              <p>
+                By creating an account and using UniNotes, you agree to these terms. Please read them carefully. If you do not agree, do not use the service.
+              </p>
+            </section>
+
+            <section class="mt-4">
+              <h2 class="section-title">1. Acceptable Use</h2>
+              <ul class="mt-2">
+                <li>This platform is provided for educational and campus-related purposes only.</li>
+                <li>Do not use the service to upload illegal material, send spam, or distribute malware.</li>
+                <li>You are responsible for keeping your account credentials secure. Do not share your password.</li>
+                <li>Respect other users — harassment, hate speech, or threats are prohibited.</li>
+              </ul>
+            </section>
+
+            <section class="mt-4">
+              <h2 class="section-title">2. Data & Privacy</h2>
+              <p class="mt-2">We handle data as follows:</p>
+              <ul>
+                <li>Content you upload may be stored locally on the server or on the configured database (for example, MongoDB Atlas) for demonstration and operational purposes.</li>
+                <li>We do not guarantee permanent storage or backups; treat UniNotes as an online sharing platform, not a long-term archive.</li>
+                <li>Administrators may access data for maintenance, moderation, or security investigations, and only when necessary.</li>
+              </ul>
+            </section>
+
+            <section class="mt-4">
+              <h2 class="section-title">3. Platform Capabilities & Limitations</h2>
+              <p class="mt-2">UniNotes is a lightweight note-sharing platform. Current limitations include:</p>
+              <ul>
+                <li>No real-time collaborative editing (e.g., simultaneous document editing).</li>
+                <li>Primary purpose is sharing existing notes — it is not a full-featured note-taking application.</li>
+                <li>No automated plagiarism detection or advanced AI validation of uploads.</li>
+                <li>No official offline or desktop application — access is via the web interface.</li>
+                <li>Limited social features — comments and threaded discussions are not supported at this time.</li>
+              </ul>
+            </section>
+
+            <section class="mt-4">
+              <h2 class="section-title">4. Account Suspension & Enforcement</h2>
+              <ul class="mt-2">
+                <li>Accounts may be suspended or terminated for policy violations, illegal activity, or abuse.</li>
+                <li>We reserve the right to remove or restrict access to content that violates these terms or applicable law.</li>
+                <li>If you believe an action was taken in error, contact the system administrator with relevant details.</li>
+              </ul>
+            </section>
+
+            <section class="mt-4">
+              <h2 class="section-title">5. Reporting and Support</h2>
+              <p class="mt-2">To report abuse, content concerns, or technical issues, contact the system administrator at <a href="mailto:bonimae.laluna@msugensan.edu.ph">bonimae.laluna@msugensan.edu.ph</a> with a clear subject line and supporting information.</p>
+            </section>
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+              <small class="muted">Last updated: 2025-10-22</small>
+              <div>
+                <a href="register.html" class="btn btn-outline-secondary btn-sm me-2"><i class="bi bi-arrow-left"></i> Back</a>
+                <!-- Return to Home button removed as requested -->
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <footer class="container text-center mt-5">
+      <div class="border-top pt-3">
+  <small>© <span id="year"></span> UniNotes. All rights reserved. <span class="text-muted">Terms apply.</span></small>
+      </div>
+    </footer>
+
+    <script>
+      // small footer year and accessibility focus
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

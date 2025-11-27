@@ -1,0 +1,129 @@
+/* ===================== REPORTS MODULE STYLES ===================== */
+// File: views/admin/css/reports.css
+/* --- Page Container --- */
+.module-manage-reports {
+  padding: 1rem 1.2rem;
+  font-size: 0.95rem;
+}
+
+/* --- KPI Cards --- */
+.kpi-section .kpi-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.kpi-section .kpi-card:hover {
+  transform: translateY(-3px);
+}
+
+.kpi-section .kpi-card i {
+  font-size: 1.6rem;
+  color: #007bff;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.kpi-section .kpi-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.kpi-section .kpi-value {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+/* --- Filter Section --- */
+.filter-section {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+.filter-section .input-group-text {
+  background-color: #fff;
+}
+
+.filter-section select,
+.filter-section input {
+  font-size: 0.9rem;
+}
+
+/* --- Table --- */
+.table th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table th i {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-left: 3px;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* --- Actions Column --- */
+.col-actions {
+  width: 150px;
+}
+
+.btn-sm i {
+  font-size: 0.9rem;
+}
+
+/* --- Modals --- */
+.modal-content {
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.modal-header.bg-light {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer .btn {
+  min-width: 120px;
+}
+
+#notePreviewContainer {
+  background: #f8f9fa;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  border: 1px dashed #dee2e6;
+}
+
+/* --- Toasts --- */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .filter-section .row > div {
+    margin-bottom: 0.5rem;
+  }
+  .col-actions {
+    width: auto;
+  }
+  .kpi-section .kpi-card {
+    padding: 0.8rem 0.3rem;
+  }
+}

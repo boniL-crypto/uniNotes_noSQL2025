@@ -1,0 +1,256 @@
+<!-- views/admin/modules/reports.html -->
+<div class="module-manage-reports page-container">
+
+  <!-- Header -->
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h4 class="mb-0"><i class="bi bi-flag"></i> Manage Reports</h4>
+  </div>
+
+  <!-- KPI Section -->
+  <div class="row text-center justify-content-between kpi-section" id="reportsKpiRow">
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="kpi-card border bg-purple">
+        <i class="bi bi-flag"></i>
+        <div class="kpi-label">Total Reports</div>
+        <div class="kpi-value" id="kpi_total">0</div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="kpi-card border bg-sky">
+        <i class="bi bi-exclamation-circle"></i>
+        <div class="kpi-label">Pending</div>
+        <div class="kpi-value" id="kpi_pending">0</div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="kpi-card border bg-green">
+        <i class="bi bi-eye"></i>
+        <div class="kpi-label">Reviewed</div>
+        <div class="kpi-value" id="kpi_reviewed">0</div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="kpi-card border bg-green">
+        <i class="bi bi-check-circle"></i>
+        <div class="kpi-label">Resolved</div>
+        <div class="kpi-value" id="kpi_resolved">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="card card-ghost mb-3 p-3 filter-section">
+    <div class="row g-2 align-items-center flex-nowrap">
+      <div class="col flex-grow-1">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="text" id="searchKeyword" class="form-control" placeholder="Search by title or reporter">
+        </div>
+      </div>
+
+      <div class="col-auto">
+        <select id="filterReason" class="form-select">
+          <option value="">All Reasons</option>
+          <option value="Inappropriate content">Inappropriate content</option>
+          <option value="Spam">Spam</option>
+          <option value="Copyright violation">Copyright violation</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="col-auto">
+        <select id="filterStatus" class="form-select">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="resolved">Resolved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+
+      <div class="col-auto">
+        <input type="month" id="filterMonth" class="form-control">
+      </div>
+
+      <div class="col-auto">
+        <button class="btn btn-primary px-4" id="reportsSearchBtn">
+          <i class="bi bi-search"></i> Search
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+    <!-- Reports Table -->
+    <div class="card card-ghost p-3">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+            <tr>
+            <th style="width:60px;">No.</th>
+            <th class="sortable" data-field="reportId" onclick="sortTable('reportId', this)">
+                Report ID <i class="bi bi-arrow-down-up text-muted"></i>
+            </th>
+            <th class="sortable" data-field="noteTitle" onclick="sortTable('noteTitle', this)">
+                Note Title <i class="bi bi-arrow-down-up text-muted"></i>
+            </th>
+            <th class="sortable" data-field="reporter" onclick="sortTable('reporter', this)">
+                Reporter <i class="bi bi-arrow-down-up text-muted"></i>
+            </th>
+            <th class="sortable" data-field="reason" onclick="sortTable('reason', this)">
+                Reason <i class="bi bi-arrow-down-up text-muted"></i>
+            </th>
+            <th class="sortable" data-field="status" onclick="sortTable('status', this)">
+                Status <i class="bi bi-arrow-down-up text-muted"></i>
+            </th>
+            <th style="width:150px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="reportsTableBody">
+            <tr><td colspan="7" class="text-center">Loading...</td></tr>
+        </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center mt-3" id="reportsPagination"></ul>
+    </nav>
+    </div>
+
+
+<!-- View Report Modal -->
+<div class="modal fade" id="reportViewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <h5 class="modal-title"><i class="bi bi-flag"></i> Report Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row g-3">
+
+          <!-- IDs Row -->
+          <div class="col-md-4">
+            <label class="form-label">Report ID</label>
+            <input class="form-control form-control-sm text-monospace" id="view_reportId" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Note ID</label>
+            <div class="d-flex gap-2 align-items-center">
+              <input class="form-control form-control-sm text-monospace" id="view_noteId" readonly>
+              <button class="btn btn-outline-secondary btn-sm" id="openNoteBtn" title="Open Note">
+                Open
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Uploader ID</label>
+            <input class="form-control form-control-sm text-monospace" id="view_uploaderId" readonly>
+          </div>
+
+          <!-- Reporter ID + Date -->
+          <div class="col-md-4">
+            <label class="form-label">Reporter ID</label>
+            <input class="form-control form-control-sm text-monospace" id="view_reporterId" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Date Reported</label>
+            <input class="form-control form-control-sm" id="view_createdAt" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Status</label>
+            <input class="form-control form-control-sm" id="view_status" readonly>
+          </div>
+
+          <!-- Title / Uploader / Reporter -->
+          <div class="col-md-4">
+            <label class="form-label">Note Title</label>
+            <input class="form-control" id="view_noteTitle" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Uploader Name</label>
+            <input class="form-control" id="view_uploader" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Reporter Name</label>
+            <input class="form-control" id="view_reporter" readonly>
+          </div>
+
+          <!-- Reason + Description -->
+          <div class="col-md-6">
+            <label class="form-label">Reason</label>
+            <input class="form-control" id="view_reason" readonly>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" id="view_description" rows="2" readonly></textarea>
+          </div>
+
+          <!-- File Preview -->
+          <div class="col-12">
+            <label class="form-label">Note Preview / File</label>
+            <div id="notePreviewContainer"
+                 class="border rounded p-2 bg-light"
+                 style="min-height: 300px; overflow: auto;">
+              <small class="text-muted">Preview will appear here (PDF, image, or embedded file).</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" id="reviewReportBtn">
+          <i class="bi bi-eye"></i> Mark Reviewed
+        </button>
+        <button class="btn btn-success" id="resolveReportBtn">
+          <i class="bi bi-check-circle"></i> Mark Resolved
+        </button>
+        <button class="btn btn-warning" id="rejectReportBtn">
+          <i class="bi bi-x-circle"></i> Reject
+        </button>
+        <button class="btn btn-danger" id="deleteReportBtn">
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Inline Delete Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteReportModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <i class="bi bi-exclamation-triangle text-danger fs-3"></i>
+        <p class="mt-2">Are you sure you want to delete this report?</p>
+        <div class="d-flex justify-content-center gap-2 mt-3">
+          <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-danger btn-sm" id="confirmDeleteReportBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Confirm Delete Modal (report deletion) -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title"><i class="bi bi-trash"></i> Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">Are you sure you want to delete this report?</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

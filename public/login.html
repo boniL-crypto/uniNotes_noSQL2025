@@ -1,0 +1,204 @@
+<!-- public/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | UniNotes</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Optionally Bootstrap Icons for Google Icon -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #4e73df, #1cc88a);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .form-control {
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+    }
+    .btn-primary {
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+    }
+    .form-label {
+      font-weight: 500;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4e73df;
+    }
+    .divider {
+      text-align: center;
+      margin: 1.5rem 0;
+      position: relative;
+    }
+    .divider::before, .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #ccc;
+    }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+  </style>
+</head>
+
+<!-- Floating Toast -->
+<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1080;">
+  <div id="toastBox" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div id="toastMsg" class="toast-body"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="card p-4">
+          <div class="text-center mb-4">
+            <div class="logo">UniNotes</div>
+            <p class="text-muted">Welcome back! Please login to continue.</p>
+          </div>
+
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="email" class="form-label">Institutional Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="name@msugensan.edu.ph" required />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required />
+            </div>
+            
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div class="text-end mb-3">
+              <a href="#" id="forgotPasswordLink" class="text-decoration-none text-primary" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                Forgot password?
+              </a>
+            </div>
+          </form>
+
+          <div class="divider">or</div>
+
+          <div class="d-grid mb-3">
+            <a href="http://localhost:5000/api/auth/google" class="btn btn-outline-danger w-100">
+              <i class="bi bi-google"></i> Login with Google
+            </a>
+          </div>
+
+          <p class="text-center mt-3">
+            Don’t have an account? <a href="register.html">Register here</a>
+          </p>
+          <div class="text-center mt-2">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#contactModal" class="small muted-link">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Deactivated Modal -->
+  <div class="modal fade" id="deactivatedModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title"><i class="bi bi-x-circle"></i> Account Disabled</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p id="deactivatedMsg">Your account has been deactivated. Please contact us.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/toast.js"></script>
+  <script src="/js/contact.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title"><i class="bi bi-envelope"></i> Reset Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Enter your institutional email and we’ll send you a link to reset your password.</p>
+        <input type="email" id="resetEmail" class="form-control mb-3" placeholder="name@msugensan.edu.ph" />
+        <div id="resetMessage" class="text-center text-success fw-semibold d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="sendResetBtn">Send Reset Link</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
+
+<!-- Contact Modal (shared) -->
+<div class="modal fade" id="contactModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+  <h5 class="modal-title"><i class="bi bi-chat-dots"></i> Contact Us</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="contactForm">
+        <div class="modal-body">
+          <div class="mb-2">
+            <label class="form-label">Your name</label>
+            <input id="contactName" class="form-control" required />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Your email</label>
+            <input id="contactEmail" class="form-control" type="email" required />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Subject (optional)</label>
+            <input id="contactSubject" class="form-control" />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Message</label>
+            <textarea id="contactMessage" class="form-control" rows="4" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Keep empty to discourage inline scripts; logic moved to /js/login.js
+</script>

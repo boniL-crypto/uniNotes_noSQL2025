@@ -1,0 +1,122 @@
+<!-- public/student/profile.html -->
+<section class="profile-section">
+  <div class="container py-5">
+    <div class="card p-4 shadow-sm">
+      <h3 class="mb-4">My Profile</h3>
+
+      <form id="profileForm" enctype="multipart/form-data">
+        <div class="row g-3">
+
+          <!-- Full Name -->
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="name" name="name" class="form-control" required />
+            <div id="nameFeedback" class="invalid-feedback"></div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" disabled />
+          </div>
+
+          <!-- College -->
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">College</label>
+            <select id="college" name="college" class="form-select">
+              <option value="">Select College</option>
+            </select>
+          </div>
+
+          <!-- Course -->
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">Course</label>
+            <select id="course" name="course" class="form-select">
+              <option value="">Select Course</option>
+            </select>
+          </div>
+
+
+        <div class="row g-3 mt-2">
+          <!-- Year Level -->
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">Year Level</label>
+            <select id="yearLevel" name="yearLevel" class="form-select">
+              <option value="">Select year</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+              <option>Graduate</option>
+            </select>
+          </div>
+
+          <!-- Student ID (immutable) -->
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">Student ID</label>
+            <!-- Disabled like Email so it cannot be changed by the user -->
+            <input type="text" id="studentId" name="studentId" class="form-control" disabled />
+          </div>
+
+          <!-- Contact -->
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">Contact</label>
+            <input type="text" id="contact" name="contact" class="form-control" />
+            <div id="contactFeedback" class="invalid-feedback"></div>
+          </div>
+
+          <!-- Avatar -->
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">Avatar</label>
+            <input type="file" id="avatar" name="avatar" accept="image/*" class="form-control" />
+            <div id="avatarFeedback" class="invalid-feedback"></div>
+            <img id="avatarPreview" class="mt-2 rounded border" 
+                 style="max-width: 100%; height: 80px; display: none;" />
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="row g-3 mt-3">
+          <div class="col-12">
+            <label class="form-label">Short Bio</label>
+            <textarea id="bio" name="bio" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+
+        <!-- Change Password -->
+        <div class="row g-3 mt-4">
+          <h5>Change Password</h5>
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">Current Password</label>
+            <div class="input-group">
+              <input type="password" id="currentPassword" name="currentPassword" class="form-control" />
+              <button class="btn btn-outline-secondary toggle-password" type="button" aria-label="Show password" data-target="#currentPassword">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div id="currentPasswordFeedback" class="invalid-feedback"></div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <label class="form-label">New Password</label>
+            <div class="input-group">
+              <input type="password" id="newPassword" name="newPassword" class="form-control" />
+              <button class="btn btn-outline-secondary toggle-password" type="button" aria-label="Show password" data-target="#newPassword">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div id="newPasswordFeedback" class="invalid-feedback"></div>
+          </div>
+        </div>
+
+        <!-- Alerts & Save Button -->
+        <div class="mt-4">
+          <div id="profileAlert" class="alert d-none"></div>
+          <button id="submitBtn" type="submit" class="btn btn-primary">Save Changes</button>
+          <button id="requestDeleteBtn" type="button" class="btn btn-outline-danger ms-2">Request account deletion</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/student/js/profile.js"></script>
+</section>

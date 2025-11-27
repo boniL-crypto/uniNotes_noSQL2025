@@ -1,0 +1,104 @@
+/* ========================
+   css/dashboard-feed Dashboard Feed Styles css
+======================== */
+//public/student/css/dashboard-feed.css
+
+.dashboard-feed {
+  padding: 1.5rem;
+}
+
+/* Note Card */
+.note-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform .2s;
+}
+
+.note-card:hover {
+  transform: translateY(-3px);
+}
+
+.note-card h6.note-title {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Note Meta (subject, uploader, date) */
+.note-meta {
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.note-meta i {
+  color: #3b82f6;
+  margin-right: 4px;
+}
+
+/* Tags */
+.tags .badge {
+  margin-right: .3rem;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.tags .badge i {
+  color: #3b82f6;
+  margin-right: 3px;
+}
+
+/* Likes */
+.likes {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  color: #475569;
+}
+
+.likes i {
+  color: #ef4444; /* red thumbs-up */
+}
+
+/* Search & Filter Bar */
+.search-filter-bar .form-control,
+.search-filter-bar .form-select {
+  min-width: 120px;
+}
+
+.search-filter-bar .input-group-text {
+  background-color: #fff;
+  border-right: none;
+}
+
+.search-filter-bar .input-group-text i {
+  color: #2563eb;
+}
+
+.search-filter-bar .form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 0.15rem rgba(59,130,246,.25);
+}
+
+/* Pagination */
+.pagination .page-link {
+  color: #2563eb;
+}
+
+.pagination .page-link:hover {
+  background-color: #e0f2fe;
+  color: #1d4ed8;
+}
+
+/* Section Title */
+.notes-section h5 {
+  font-weight: 600;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.notes-section h5 i {
+  color: #3b82f6;
+}

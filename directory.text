@@ -1,0 +1,92 @@
+UNI-NOTES
+├── .env
+├── directory.text
+├── package-lock.json
+├── package.json
+├── seedAdmin.js
+├── server.js
+├── api
+│   └── notes.js
+├── middleware
+│   └── auth.js
+├── models
+│   ├── College.js
+│   ├── Notes.js
+│   ├── Notification.js
+│   ├── Report.js
+│   ├── Subject.js
+│   └── User.js
+├── public
+│   ├── login.html
+│   ├── register.html
+│   ├── terms.html
+│   └── student
+│       ├── dashboard.html
+│       ├── css
+│       │   ├── dashboard-feed.css
+│       │   ├── dashboard.css
+│       │   ├── mynotes.css
+│       │   └── profile.css
+│       ├── js
+│       │   ├── app.js
+│       │   ├── dashboard-feed.js
+│       │   ├── login.js
+│       │   ├── mynotes.js
+│       │   ├── notifications.js
+│       │   ├── profile.js
+│       │   └── register.js
+│       └── modules
+│           ├── dashboard-feed.html
+│           ├── mynotes.html
+│           ├── notifications.html
+│           ├── profile.html
+│           └── dashboard.html
+├── routes
+│   ├── admin
+│   │   ├── colleges.js
+│   │   ├── dashboard.js
+│   │   ├── index.js
+│   │   ├── notes.js
+│   │   ├── reports.js
+│   │   ├── subjects.js
+│   │   └── users.js
+│   ├── auth.js
+│   ├── notes.js
+│   ├── notifications.js
+│   ├── old admin.js
+│   ├── old notes.js
+│   └── reports.js
+├── uploads
+│   └── (avatars, notes, etc.)
+├── utils
+│   └── cleanPayload.js
+└── views
+    └── admin
+        ├── css
+        │   ├── admin.css
+        │   ├── cards.css
+        │   ├── colleges.css
+        │   ├── dashboard-feed.css
+        │   ├── layout.css
+        │   ├── notes.css
+        │   ├── sidebar.css
+        │   ├── subjects.css
+        │   └── users.css
+        ├── js
+        │   ├── colleges.js
+        │   ├── dashboard-feed.js
+        │   ├── dashboard.js
+        │   ├── notes.js
+        │   ├── old dashboard-feed.js
+        │   ├── subjects.js
+        │   └── users.js
+        └── modules
+            ├── analytics.html
+            ├── colleges.html
+            ├── dashboard-feed.html
+            ├── dashboard.html
+            ├── notes.html
+            ├── notifications.html
+            ├── reports.html
+            ├── subjects.html
+            └── users.html

@@ -1,0 +1,82 @@
+<!-- public/student/modules/dashboard-feed.html -->
+
+<section class="dashboard-feed">
+
+  <!-- KPI Row -->
+  <div id="kpiRow" class="row g-3 mb-3">
+    <!-- KPI cards injected here -->
+  </div>
+
+  <!-- 🔍 Search & Filters -->
+  <div class="search-filter-bar d-flex flex-wrap align-items-center gap-2 mb-4">
+    <div class="input-group flex-grow-1" style="max-width: 280px;">
+      <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+      <input type="text" id="searchKeyword" class="form-control" placeholder="Search by title or keyword">
+    </div>
+
+    <select id="filterSubject" class="form-select" style="max-width: 160px;">
+      <option value="">All Subjects</option>
+    </select>
+
+    <div class="input-group" style="max-width: 180px;">
+      <span class="input-group-text bg-white"><i class="bi bi-person"></i></span>
+      <input type="text" id="filterUploader" class="form-control" placeholder="Uploader">
+    </div>
+
+    <div class="input-group" style="max-width: 180px;">
+      <span class="input-group-text bg-white"><i class="bi bi-calendar3"></i></span>
+      <input type="month" id="filterMonth" class="form-control">
+    </div>
+
+    <div class="input-group" style="max-width: 180px;">
+      <span class="input-group-text bg-white"><i class="bi bi-tags"></i></span>
+      <input type="text" id="filterTags" class="form-control" placeholder="Tags">
+    </div>
+
+    <button class="btn btn-primary" id="searchBtn">
+      <i class="bi bi-search"></i> Search
+    </button>
+  </div>
+
+  <!-- 📚 Notes Grid -->
+  <div id="notesGrid" class="row g-3">
+    <!-- Notes injected here -->
+  </div>
+
+
+  <!-- ===================== REPORT NOTE MODAL (Fixed like My Notes) ===================== -->
+<div class="modal fade" id="reportNoteModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="reportNoteForm">
+        <div class="modal-header">
+          <h5 class="modal-title">Report Note</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- ✅ Hidden ID to track which note -->
+          <input type="hidden" id="reportNoteId">
+
+          <!-- ✅ Alert placeholder -->
+          <div class="alert d-none" id="reportNoteAlert"></div>
+
+          <select id="reportReason" class="form-select" required>
+            <option value="">Select reason</option>
+            <option value="Inappropriate content">Inappropriate content</option>
+            <option value="Spam">Spam</option>
+            <option value="Copyright violation">Copyright violation</option>
+            <option value="Other">Other</option>
+          </select>
+          <textarea id="reportDescription" class="form-control mt-2" placeholder="Add details (optional)"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Submit Report</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</section>
+
