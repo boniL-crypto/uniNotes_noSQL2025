@@ -2,75 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>UniNotes — Admin & Student Portal</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f5f7fa;
-        margin: 0;
-        padding: 30px;
-        line-height: 1.7;
-        color: #333;
-    }
-    .wrapper {
-        max-width: 900px;
-        margin: auto;
-    }
-    h1, h2, h3 {
-        color: #222;
-        font-weight: 700;
-    }
-    h1 {
-        font-size: 34px;
-        margin-bottom: 10px;
-    }
-    h2 {
-        margin-top: 40px;
-        margin-bottom: 10px;
-        padding-left: 12px;
-        border-left: 6px solid #4a90e2;
-        font-size: 24px;
-    }
-    h3 {
-        margin-top: 25px;
-        font-size: 20px;
-    }
-    p {
-        margin-bottom: 18px;
-    }
-    .section {
-        background: #fff;
-        padding: 22px 28px;
-        border-radius: 12px;
-        margin-bottom: 28px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    }
-    pre, code {
-        background: #272822;
-        color: #f8f8f2;
-        padding: 10px 14px;
-        border-radius: 6px;
-        font-family: Consolas, monospace;
-        overflow-x: auto;
-        font-size: 14px;
-    }
-    pre {
-        margin: 12px 0;
-        padding: 18px;
-    }
-    ul {
-        margin: 10px 0 20px;
-    }
-    li {
-        margin-bottom: 6px;
-    }
-    .footer {
-        font-size: 14px;
-        margin-top: 40px;
-        opacity: 0.7;
-    }
-</style>
-</head>
 
 <body>
 <div class="wrapper">
@@ -298,3 +229,4 @@ node server.js
 </div>
 </body>
 </html>
+
