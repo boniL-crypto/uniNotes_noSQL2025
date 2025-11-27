@@ -175,13 +175,12 @@ node server.js
     <h2>Roles & permissions</h2>
     <p>Roles are enforced via <code>middleware/permissions.js</code> using <code>requirePermission()</code>.</p>
 
-    <h3>Roles:</h3>
-    <ul>
-        <li><strong>super_admin</strong> — full access</li>
-        <li><strong>admin</strong> — user/notification management</li>
-        <li><strong>moderator</strong> — moderate notes & reports</li>
-        <li><strong>student</strong> — personal notes & collections</li>
-    </ul>
+    Roles:
+  
+        super_admin— full access
+        admin— user/notification management
+        moderator — moderate notes & reports
+        student — personal notes & collections
 </div>
 
 <div class="section">
@@ -229,6 +228,7 @@ node server.js
 </div>
 </body>
 </html>
+
 
 
 
