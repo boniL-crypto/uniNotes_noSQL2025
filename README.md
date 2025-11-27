@@ -78,8 +78,8 @@ cd msu-uninotes
     <p>UniNotes is a Node.js/Express application using MongoDB as the database. It supports two main experiences:</p>
 
    
-        <li><strong>Admin interface:</strong> Manage users, notes, reports, and notifications.</li>
-        <li><strong>Student/public interface:</strong> Browse, upload, manage notes, collections, and notifications.</li>
+       Admin interface:Manage users, notes, reports, and notifications.
+       Student/public interface:Browse, upload, manage notes, collections, and notifications.
     
 </div>
 
@@ -229,6 +229,7 @@ node server.js
 </div>
 </body>
 </html>
+
 
 
 
