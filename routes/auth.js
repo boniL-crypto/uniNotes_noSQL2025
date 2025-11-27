@@ -9,8 +9,6 @@ if (process.env.NODE_ENV !== 'production') {
   console.log('🔧 auth routes loaded (development mode)');
 }
 
-// Multer and business logic moved into authController/authService
-
 // ==========================
 // Register
 // ==========================
@@ -31,7 +29,7 @@ router.post('/login', authController.login);
 
 
 
-// ✅ Unified /me route for both Google + Manual logins
+
 // ----------------------
 // Get Current Profile (normalized output)
 // ----------------------
