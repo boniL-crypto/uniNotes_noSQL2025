@@ -216,10 +216,7 @@ node server.js
     </ul>
 </div>
 
-<div class="section">
-    <h2>Contributing</h2>
-    <p>Fork → branch → pull request. Update docs when changing roles/models.</p>
-</div>
+
 
 <div class="footer">
     <p>Generated on: 2025-11-28</p>
@@ -228,6 +225,7 @@ node server.js
 </div>
 </body>
 </html>
+
 
 
 
